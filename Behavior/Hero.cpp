@@ -1,13 +1,13 @@
 #ifndef Hero_H
 #define Hero_H
-#include "DamageStrategy.h"
+#include "IAttackState.h"
 class Hero
 {
 protected:
     float baseDMG = 100;
-    DamageStrategy* strat;
+    IAttackState* state;
 public:
-    Hero(DamageStrategy* str):strat(str){}
+    Hero(IAttackState* st):state(st){}
 
     void increase(float dmg)
     {
@@ -16,16 +16,17 @@ public:
 
     float attack()
     {
-        return strat->getDamage(baseDMG);
+        return state->getDamage(baseDMG);
     }
-    void setStrategy(DamageStrategy* str)
+    void setState(IAttackState* st)
     {
-        strat = str;
+        state = st;
     }
     float getBase()
     {
         return baseDMG;
     }
+
 };
 
 
